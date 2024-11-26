@@ -8,7 +8,7 @@
  * Plugin Name:       Gallery Box
  * Plugin URI:        https://wpthemespace.com/product/gallery-box-pro/
  * Description:       You can create awesome image, portfolio, audio, video and i-frame gellery with lots of effects By this plugin.
- * Version:           1.7.35
+ * Version:           1.7.36
  * Author:            Noor alam
  * Author URI:        http://wpthemespace.com
  * License:           GPL-2.0+
@@ -125,25 +125,24 @@ if (!function_exists('gbox_admin_scripts')) :
     }
     add_action('admin_enqueue_scripts', 'gbox_admin_scripts');
 endif;
-/**
- * Gallery Box admin role.
- *
- */
-if (!function_exists('gallerybox_activation_setup')) :
-    function gallerybox_activation_setup()
-    {
-        // Trigger our function that registers the custom post type
-        gallerybox_post_type();
-        // Gallery Box admin style and scripts
-        gbox_admin_scripts();
 
-        // Clear the permalinks after the post type has been registered
-        flush_rewrite_rules();
-        // Add new administrator role
-        gallerybox_admin_role();
-    }
-    register_activation_hook(__FILE__, 'gallerybox_activation_setup');
-endif;
+
+function gallerybox_activation_setup()
+{
+    // Register the custom post type (ensure this function does not output anything)
+    gallerybox_post_type();
+
+    // Clear the permalinks to add the new post type
+    flush_rewrite_rules();
+
+    // Add a custom role (ensure this function does not output anything)
+    gallerybox_admin_role();
+}
+register_activation_hook(__FILE__, 'gallerybox_activation_setup');
+
+
+
+
 if (!function_exists('gallerybox_deactivation_setup')) :
     function gallerybox_deactivation_setup()
     {
@@ -154,8 +153,9 @@ if (!function_exists('gallerybox_deactivation_setup')) :
         // gets the administrator role remove
         gallerybox_admin_role_remove();
     }
-    register_deactivation_hook(__FILE__, 'gallerybox_deactivation_setup');
 endif;
+register_deactivation_hook(__FILE__, 'gallerybox_deactivation_setup');
+
 /**
  * Load plugin textdomain.
  *
@@ -208,3 +208,24 @@ if (in_array('elementor/elementor.php', apply_filters('active_plugins', get_opti
     }
     add_action('elementor/widgets/register', 'gbox_ewidget_init');
 }
+
+
+/**
+ * Initialize the plugin tracker
+ *
+ * @return void
+ */
+function gallery_box_appsero_init_tracker()
+{
+
+    if (! class_exists('Appsero\Client')) {
+        require_once __DIR__ . '/appsero/src/Client.php';
+    }
+
+    $client = new Appsero\Client('ad422d2c-3317-4462-a2df-d8f2c1eb7131', 'Gallery Box', __FILE__);
+
+    // Active insights
+    $client->insights()->init();
+}
+
+gallery_box_appsero_init_tracker();

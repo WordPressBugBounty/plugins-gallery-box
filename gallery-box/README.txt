@@ -4,8 +4,8 @@ Donate link: https://wpthemespace.com/donation/
 Tags: gallery, youtube gallery, portfolio gallery, image gallery, iframe gallery
 Requires at least: 5.0
 Requires PHP: 5.6
-Tested up to: 6.6
-Stable tag: 1.7.35
+Tested up to: 6.7
+Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -147,6 +147,8 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 
 
 == Changelog ==
+= 1.7.36 =
+	* PHP error fixed
 = 1.7.32 =
 	* Elementor issue fixed
 = 1.7.28 =

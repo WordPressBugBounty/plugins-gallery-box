@@ -1,6 +1,5 @@
 <?php
-
-/**
+/*
  * Gallery Box options
  * @link              http://gbox.awesomebootstrap.net
  * @since             1.0.0

@@ -1,6 +1,11 @@
 <?php
-
-class gBoxEWidget extends \Elementor\Widget_Base {
+/*
+*
+* Elementor Addons
+*
+*/
+class gBoxEWidget extends \Elementor\Widget_Base
+{
 
     /**
      * Get widget name.
@@ -12,7 +17,8 @@ class gBoxEWidget extends \Elementor\Widget_Base {
      * @access public
      *
      */
-    public function get_name() {
+    public function get_name()
+    {
         return 'gbox_shortcode';
     }
 
@@ -26,8 +32,9 @@ class gBoxEWidget extends \Elementor\Widget_Base {
      * @access public
      *
      */
-    public function get_title() {
-        return __( 'Gallery Box', 'gbox' );
+    public function get_title()
+    {
+        return __('Gallery Box', 'gbox');
     }
 
     /**
@@ -40,7 +47,8 @@ class gBoxEWidget extends \Elementor\Widget_Base {
      * @access public
      *
      */
-    public function get_icon() {
+    public function get_icon()
+    {
         return 'eicon-gallery-grid';
     }
 
@@ -54,36 +62,39 @@ class gBoxEWidget extends \Elementor\Widget_Base {
      * @access public
      *
      */
-    public function get_categories() {
-        return [ 'general' ];
+    public function get_categories()
+    {
+        return ['general'];
     }
     /**
-	 * Get widget keywords.
-	 *
-	 * Retrieve the list of keywords the widget belongs to.
-	 *
-	 * @since 2.1.0
-	 * @access public
-	 *
-	 * @return array Widget keywords.
-	 */
-	public function get_keywords() {
-		return [ 'shortcode', 'gallery','image','video','lightbox' ];
-	}
+     * Get widget keywords.
+     *
+     * Retrieve the list of keywords the widget belongs to.
+     *
+     * @since 2.1.0
+     * @access public
+     *
+     * @return array Widget keywords.
+     */
+    public function get_keywords()
+    {
+        return ['shortcode', 'gallery', 'image', 'video', 'lightbox'];
+    }
 
-	/**
-	 * Whether the reload preview is required or not.
-	 *
-	 * Used to determine whether the reload preview is required.
-	 *
-	 * @since 1.0.0
-	 * @access public
-	 *
-	 * @return bool Whether the reload preview is required.
-	 */
-	public function is_reload_preview_required() {
-		return true;
-	}
+    /**
+     * Whether the reload preview is required or not.
+     *
+     * Used to determine whether the reload preview is required.
+     *
+     * @since 1.0.0
+     * @access public
+     *
+     * @return bool Whether the reload preview is required.
+     */
+    public function is_reload_preview_required()
+    {
+        return true;
+    }
     /**
      * Register Blank widget controls.
      *
@@ -92,9 +103,9 @@ class gBoxEWidget extends \Elementor\Widget_Base {
      * @since 1.0.0
      * @access protected
      */
-    protected function register_controls() {
+    protected function register_controls()
+    {
         $this->register_content_controls();
-
     }
 
     /**
@@ -105,32 +116,31 @@ class gBoxEWidget extends \Elementor\Widget_Base {
      * @since 1.0.0
      * @access protected
      */
-    function register_content_controls() {
+    function register_content_controls()
+    {
 
         $this->start_controls_section(
             'mgpl_query',
             [
-                'label' => esc_html__( 'Gallery Box', 'gbox' ),
+                'label' => esc_html__('Gallery Box', 'gbox'),
             ]
         );
 
 
-            $this->add_control(
-                'gbox_id',
-                [
-                    'label' => __( 'Select Gallery Box Gallery', 'gbox' ),
-                    'type' => \Elementor\Controls_Manager::SELECT,
-                    'label_block' => true,
-                    'multiple' => false,
-                    'default' => '0',
-                    'options' => gbox_gallery_list(),
-                    
-                ]
-            );
+        $this->add_control(
+            'gbox_id',
+            [
+                'label' => __('Select Gallery Box Gallery', 'gbox'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'label_block' => true,
+                'multiple' => false,
+                'default' => '0',
+                'options' => gbox_gallery_list(),
+
+            ]
+        );
 
         $this->end_controls_section();
-       
-        
     }
 
 
@@ -143,15 +153,12 @@ class gBoxEWidget extends \Elementor\Widget_Base {
      * @since 1.0.0
      * @access protected
      */
-    protected function render() {
-       
-        $settings = $this->get_settings_for_display(); 
+    protected function render()
+    {
+
+        $settings = $this->get_settings_for_display();
         $gbox_id = $this->get_settings('gbox_id');
 
-        echo do_shortcode( '[gallerybox id="'.$gbox_id.'"]' );
-
-   
+        echo do_shortcode('[gallerybox id="' . $gbox_id . '"]');
     }
-
-
 }

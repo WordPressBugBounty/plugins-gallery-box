@@ -1,6 +1,5 @@
 <?php
-
-/**
+/*
  * Add inline css 
  *
  * 
