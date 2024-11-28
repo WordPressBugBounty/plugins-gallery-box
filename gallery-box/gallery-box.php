@@ -8,7 +8,7 @@
  * Plugin Name:       Gallery Box
  * Plugin URI:        https://wpthemespace.com/product/gallery-box-pro/
  * Description:       You can create awesome image, portfolio, audio, video and i-frame gellery with lots of effects By this plugin.
- * Version:           1.7.36
+ * Version:           1.7.37
  * Author:            Noor alam
  * Author URI:        http://wpthemespace.com
  * License:           GPL-2.0+
@@ -219,7 +219,7 @@ function gallery_box_appsero_init_tracker()
 {
 
     if (! class_exists('Appsero\Client')) {
-        require_once __DIR__ . '/appsero/src/Client.php';
+        require_once __DIR__ . '/vendor/appsero/client/src/Client.php';
     }
 
     $client = new Appsero\Client('ad422d2c-3317-4462-a2df-d8f2c1eb7131', 'Gallery Box', __FILE__);
