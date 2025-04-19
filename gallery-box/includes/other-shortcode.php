@@ -13,7 +13,7 @@ function n_single_youtube_gbox( $atts, $content = null ) {
         'id' => 'CXkl1FgeM7M',
         'height' => 300,
         'width' => 800,
-        'caption' => __('simple Youtube video','gbox')
+        'caption' => __('simple Youtube video','gallery-box')
        
     ), $atts );
 	$youtube_url='//youtu.be/'.$g_youtube['id'];
@@ -30,7 +30,7 @@ function n_single_vimeo_gbox( $atts, $content = null ) {
         'id' => '121840700',
         'height' => 400,
         'width' => 800,
-        'caption' => __('simple Vimeo video','gbox')
+        'caption' => __('simple Vimeo video','gallery-box')
     ), $atts );
 	$vimeo_url='//vimeo.com/'.$g_vimeo['id'];
 	$vimeo_img_url='//i.vimeocdn.com/video/'.$g_vimeo['id'].'_640.jpg';

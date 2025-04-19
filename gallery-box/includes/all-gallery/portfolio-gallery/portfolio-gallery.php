@@ -112,7 +112,7 @@ if( $gbox_layout_type == 'masonry_two' ){
 }
 
 
-		$portfolio_title =  !empty( $portfolio['portfolio_title'])  ? $portfolio['portfolio_title'] : __('Portfolio gallery','gbox');
+		$portfolio_title =  !empty( $portfolio['portfolio_title'])  ? $portfolio['portfolio_title'] : __('Portfolio gallery','gallery-box');
 		$port_caption =  !empty( $portfolio['port_caption'])  ? $portfolio['port_caption'] : $portfolio_title ;
 		$port_link =  !empty( $portfolio['port_link'])  ? $portfolio['port_link'] : '#' ;
         $image_small = isset($portfolio['port_img_id']) ? wp_get_attachment_image_src($portfolio['port_img_id'], $gbox_adimg_size ):''; 

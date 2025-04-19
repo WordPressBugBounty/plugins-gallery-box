@@ -81,7 +81,7 @@ function isVimeoConnected()
  */
 function gbox_gallery_list( $post_type = 'gallery_box' ){
     $options = array();
-    $gbox_untitle = esc_html__('Untitled gallery id','gbox');
+    $gbox_untitle = esc_html__('Untitled gallery id','gallery-box');
     $options['0'] = __('Select','magical-addons-for-elementor');
    // $perpage = wooaddons_get_option( 'loadproductlimit', 'wooaddons_others_tabs', '20' );
     $all_post = array( 'posts_per_page' => -1, 'post_type'=> $post_type );

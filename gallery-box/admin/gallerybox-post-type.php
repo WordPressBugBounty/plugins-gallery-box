@@ -13,24 +13,24 @@ if (!function_exists('gallerybox_post_type')) :
 	function gallerybox_post_type()
 	{
 		$labels = array(
-			'name'               => __('galleries', 'gbox'),
-			'singular_name'      => __('gallery', 'gbox'),
-			'menu_name'          => __('Gallery Box', 'gbox'),
-			'name_admin_bar'     => __('Gallery Box', 'gbox'),
-			'add_new'            => __('Add New gallery', 'gbox'),
-			'add_new_item'       => __('Add New gallery', 'gbox'),
-			'new_item'           => __('New gallery', 'gbox'),
-			'edit_item'          => __('Edit gallery', 'gbox'),
-			'view_item'          => __('View gallery', 'gbox'),
-			'all_items'          => __('All gallery', 'gbox'),
-			'parent_item_colon'  => __('Parent gallery:', 'gbox'),
-			'not_found'          => __('No gallery found.', 'gbox'),
-			'not_found_in_trash' => __('No gallery found in Trash.', 'gbox'),
+			'name'               => __('galleries', 'gallery-box'),
+			'singular_name'      => __('gallery', 'gallery-box'),
+			'menu_name'          => __('Gallery Box', 'gallery-box'),
+			'name_admin_bar'     => __('Gallery Box', 'gallery-box'),
+			'add_new'            => __('Add New gallery', 'gallery-box'),
+			'add_new_item'       => __('Add New gallery', 'gallery-box'),
+			'new_item'           => __('New gallery', 'gallery-box'),
+			'edit_item'          => __('Edit gallery', 'gallery-box'),
+			'view_item'          => __('View gallery', 'gallery-box'),
+			'all_items'          => __('All gallery', 'gallery-box'),
+			'parent_item_colon'  => __('Parent gallery:', 'gallery-box'),
+			'not_found'          => __('No gallery found.', 'gallery-box'),
+			'not_found_in_trash' => __('No gallery found in Trash.', 'gallery-box'),
 		);
 
 		$args = array(
 			'labels'             => $labels,
-			'description'        => __('You can create gallery with image, Youtube and Vimeo video, Soundcloud audio and i-frame content by gallery box.', 'gbox'),
+			'description'        => __('You can create gallery with image, Youtube and Vimeo video, Soundcloud audio and i-frame content by gallery box.', 'gallery-box'),
 			'public'             => false,
 			'show_ui'            => true,
 			'show_in_menu'       => true,
@@ -76,21 +76,21 @@ if (!function_exists('gbox_updated_messages')) :
 		$gallery_shortcode = '[gallerybox id="' . $post_ID . '"]';
 		$messages['gallery_box'] = array(
 			0  => '', // Unused. Messages start at index 1.
-			1  => sprintf(__('Gallery updated. Shortcode is : <strong>%s</strong>', 'gbox'), $gallery_shortcode),
-			2  => sprintf(__('Gallery updated. Shortcode is : <strong>%s</strong>', 'gbox'), $gallery_shortcode),
-			3  => __('Gallery field deleted.', 'gbox'),
-			4  => __('Gallery item updated.', 'gbox'),
+			1  => sprintf(__('Gallery updated. Shortcode is : <strong>%s</strong>', 'gallery-box'), $gallery_shortcode),
+			2  => sprintf(__('Gallery updated. Shortcode is : <strong>%s</strong>', 'gallery-box'), $gallery_shortcode),
+			3  => __('Gallery field deleted.', 'gallery-box'),
+			4  => __('Gallery item updated.', 'gallery-box'),
 			/* translators: %s: date and time of the revision */
-			5  => isset($_GET['revision']) ? sprintf(__('Gallery restored to revision from %s', 'gbox'), wp_post_revision_title((int) $_GET['revision'], false)) : false,
-			6  => sprintf(__('Gallery published. Shortcode is : <strong>%s</strong>', 'gbox'), $gallery_shortcode),
-			7  => sprintf(__('Gallery saved. Shortcode is : <strong>%s</strong>', 'gbox'), $gallery_shortcode),
-			8 => sprintf(__('Gallery submitted. Shortcode is : <strong>%s</strong>', 'gbox'), $gallery_shortcode),
+			5  => isset($_GET['revision']) ? sprintf(__('Gallery restored to revision from %s', 'gallery-box'), wp_post_revision_title((int) $_GET['revision'], false)) : false,
+			6  => sprintf(__('Gallery published. Shortcode is : <strong>%s</strong>', 'gallery-box'), $gallery_shortcode),
+			7  => sprintf(__('Gallery saved. Shortcode is : <strong>%s</strong>', 'gallery-box'), $gallery_shortcode),
+			8 => sprintf(__('Gallery submitted. Shortcode is : <strong>%s</strong>', 'gallery-box'), $gallery_shortcode),
 			9  => sprintf(
-				__('Gallery item scheduled for: <strong>%1$s</strong>.', 'gbox'),
+				__('Gallery item scheduled for: <strong>%1$s</strong>.', 'gallery-box'),
 				// translators: Publish box date format, see http://php.net/date
-				date_i18n(__('M j, Y @ G:i', 'gbox'), strtotime($post->post_date))
+				date_i18n(__('M j, Y @ G:i', 'gallery-box'), strtotime($post->post_date))
 			),
-			10 => __('Gallery draft updated.', 'gbox')
+			10 => __('Gallery draft updated.', 'gallery-box')
 		);
 
 
@@ -133,27 +133,27 @@ if (!function_exists('gbox_column_add_gallery_type')) :
 
 
 		if (!empty($image_title) || !empty($image_small) || !empty($gbox_simple_imgs)) {
-			$img_main = __('Image gallery', 'gbox');
+			$img_main = __('Image gallery', 'gallery-box');
 		} else {
 			$img_main = '';
 		}
 		if (!empty($you_url)) {
-			$youtube_main = __('Youtube gallery', 'gbox');
+			$youtube_main = __('Youtube gallery', 'gallery-box');
 		} else {
 			$youtube_main = '';
 		}
 		if (!empty($vimeo_url)) {
-			$vimeo_main = __('Vimeo gallery', 'gbox');
+			$vimeo_main = __('Vimeo gallery', 'gallery-box');
 		} else {
 			$vimeo_main = '';
 		}
 		if (!empty($portfolio_title) || !empty($port_img)) {
-			$portfolio_main = __('Portfolio gallery', 'gbox');
+			$portfolio_main = __('Portfolio gallery', 'gallery-box');
 		} else {
 			$portfolio_main = '';
 		}
 		if (!empty($iframe_url)) {
-			$iframe_main = __('iframe gallery', 'gbox');
+			$iframe_main = __('iframe gallery', 'gallery-box');
 		} else {
 			$iframe_main = '';
 		}
@@ -165,8 +165,8 @@ if (!function_exists('gbox_column_add_gallery_type')) :
 	add_filter('manage_gallery_box_posts_columns', 'gbox_wp_shortcode_column_head', 10);
 	function gbox_wp_shortcode_column_head($defaults)
 	{
-		$defaults['shortcode_generate'] = __('Gallery Shortcode', 'gbox');
-		$defaults['gallery_images_count'] = __('Gallery type', 'gbox');
+		$defaults['shortcode_generate'] = __('Gallery Shortcode', 'gallery-box');
+		$defaults['gallery_images_count'] = __('Gallery type', 'gallery-box');
 		return $defaults;
 	}
 	add_action('manage_gallery_box_posts_custom_column', 'gbox_wp_shortcode_column_content', 10, 2);
@@ -243,7 +243,7 @@ if (!function_exists('gbox_change_title_text')) :
 		$screen = get_current_screen();
 
 		if ('gallery_box' == $screen->post_type) {
-			$title = __('Enter gallery name', 'gbox');
+			$title = __('Enter gallery name', 'gallery-box');
 		}
 
 		return $title;

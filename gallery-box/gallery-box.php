@@ -8,12 +8,12 @@
  * Plugin Name:       Gallery Box
  * Plugin URI:        https://wpthemespace.com/product/gallery-box-pro/
  * Description:       You can create awesome image, portfolio, audio, video and i-frame gellery with lots of effects By this plugin.
- * Version:           1.7.37
+ * Version:           1.7.38
  * Author:            Noor alam
  * Author URI:        http://wpthemespace.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       gbox
+ * Text Domain:       gallery-box
  * Domain Path:       /languages
  */
 
@@ -164,7 +164,7 @@ register_deactivation_hook(__FILE__, 'gallerybox_deactivation_setup');
 if (!function_exists('gbox_textdomain')) :
     function gbox_textdomain()
     {
-        load_plugin_textdomain('gbox', false, plugin_basename(dirname(__FILE__)) . '/languages');
+        load_plugin_textdomain('gallery-box', false, plugin_basename(dirname(__FILE__)) . '/languages');
     }
     add_action('plugins_loaded', 'gbox_textdomain');
 endif;

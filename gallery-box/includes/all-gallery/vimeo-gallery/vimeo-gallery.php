@@ -13,8 +13,8 @@ require_once( GALLERY_BOX_PATH. '/includes/all-gallery/vimeo-gallery/vimeo-scrip
 require_once( GALLERY_BOX_PATH. '/includes/all-gallery/vimeo-gallery/vimeo-style.php');
 
 function gallery_box_vimeo_gallery($id){
-		$head = __('Vimeo Video gallery now only available in pro version.','gbox');
-	$msm = __('please update pro then Your gallery will appear once again without any change.','gbox');
+		$head = __('Vimeo Video gallery now only available in pro version.','gallery-box');
+	$msm = __('please update pro then Your gallery will appear once again without any change.','gallery-box');
 
 	printf('<div class="upgrade-output"><h2 class="pro-outpot">%s</h2><h5 class="upgrade-txt"> %s</h5><a target="blank" href="'.esc_url('https://wpthemespace.com/product/gallery-box-pro/').'" class="upgrade-btn">'.esc_html('Upgrade Pro').'</a></div>',$head,$msm);
 
@@ -83,7 +83,7 @@ foreach ( (array) $vimeo_group as $key => $vimeo_main ):
         
 	$vim_width = !empty( $vimeo_main['vim_width'])  ? $vimeo_main['vim_width'] :'600'; 
 	$vim_height = !empty( $vimeo_main['vim_height'])  ? $vimeo_main['vim_height'] :'400'; 
-	$vimeo_button = !empty( $vimeo_main['vimeo_button'])  ? $vimeo_main['vimeo_button'] :__('Show video','gbox');
+	$vimeo_button = !empty( $vimeo_main['vimeo_button'])  ? $vimeo_main['vimeo_button'] :__('Show video','gallery-box');
 
 //vimeo video id 
 	if( $vimeo_url ){

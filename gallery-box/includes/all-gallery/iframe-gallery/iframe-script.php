@@ -99,7 +99,7 @@ $iframe_loadmore =  !empty( $iframe_settings[0]['iframe_loadmore'])  ? $iframe_s
 
   }
   //append load more button
-  $gbox_smasonry<?php echo esc_attr($id); ?>.after('<div id="gbload-btn<?php echo esc_attr($id); ?>"><button id="load-more<?php echo esc_attr($id); ?>"  class="gbox-loadmore"><?php esc_html_e('Load More','gbox'); ?></button></div>');
+  $gbox_smasonry<?php echo esc_attr($id); ?>.after('<div id="gbload-btn<?php echo esc_attr($id); ?>"><button id="load-more<?php echo esc_attr($id); ?>"  class="gbox-loadmore"><?php esc_html_e('Load More','gallery-box'); ?></button></div>');
   //when load more button clicked
   $("#load-more<?php echo esc_attr($id); ?>").click(function() {
     if ($('#filters').data('clicked')) {

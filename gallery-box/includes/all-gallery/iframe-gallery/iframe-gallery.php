@@ -69,7 +69,7 @@ if( $gbox_iframe_order == 'desc' ){
 		//sort($iframe_group);
 		foreach ( (array) $iframe_group as $key => $iframe_main ):
 		
-		$iframe_title = !empty( $iframe_main['iframe_title']) ? $iframe_main['iframe_title'] : __('iframe title','gbox');
+		$iframe_title = !empty( $iframe_main['iframe_title']) ? $iframe_main['iframe_title'] : __('iframe title','gallery-box');
 		$iframe_caption = !empty( $iframe_main['iframe_caption']) ? $iframe_main['iframe_caption'] : $iframe_title ;
 		
 		$Iframe_image = isset($iframe_main['Iframe_image_id']) ? wp_get_attachment_image_src($iframe_main['Iframe_image_id'], $iframe_image_size ):'' ;
@@ -77,7 +77,7 @@ if( $gbox_iframe_order == 'desc' ){
 
 		$iframe_url = !empty( $iframe_main['iframe_url']) ? $iframe_main['iframe_url'] : get_home_url(); 
 		
-		$iframe_button = !empty( $iframe_main['iframe_button']) ? $iframe_main['iframe_button'] :__('View site','gbox'); 
+		$iframe_button = !empty( $iframe_main['iframe_button']) ? $iframe_main['iframe_button'] :__('View site','gallery-box'); 
 		?>
 		<div class="gcolumn-<?php echo esc_attr($iframe_column); ?> iframe-gallery iframe-gallery<?php echo esc_attr($id); ?> hover <?php echo esc_attr($iframe_animation); ?> gb-masonry<?php echo esc_attr($id); ?>">
 		<div class="gbox-margin gbox-iframe">

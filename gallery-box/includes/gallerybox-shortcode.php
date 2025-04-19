@@ -102,7 +102,7 @@ $iframe_url =  !empty( $gbox_iframe_main[0]['iframe_url'])  ? $gbox_iframe_main[
         
 		if(!empty($sound_id)){
 			//Soundcloud gallery
-		esc_html_e( 'Soundcloud Gallery No longer Available!!','gbox' );
+		esc_html_e( 'Soundcloud Gallery No longer Available!!','gallery-box' );
 		} 
         
 		if(!empty($iframe_url)){
@@ -117,7 +117,7 @@ $iframe_url =  !empty( $gbox_iframe_main[0]['iframe_url'])  ? $gbox_iframe_main[
 <?php wp_reset_postdata(); ?>
  <?php else: ?>
  <div class="gbox-error">
- <?php esc_html_e('No gallery item found!','gbox'); ?>
+ <?php esc_html_e('No gallery item found!','gallery-box'); ?>
  </div>
  <?php endif; ?>
 

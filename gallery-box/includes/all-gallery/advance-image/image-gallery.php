@@ -111,13 +111,13 @@ if( $gbox_layout_type == 'masonry_two' ){
 }
 
 
-		$image_title =  !empty( $img_main['image_title'])  ? $img_main['image_title'] : __('Image gallery','gbox');
+		$image_title =  !empty( $img_main['image_title'])  ? $img_main['image_title'] : __('Image gallery','gallery-box');
 		$img_caption =  !empty( $img_main['img_caption'])  ? $img_main['img_caption'] : $image_title ;
 		$link_url =  !empty( $img_main['link_url'])  ? $img_main['link_url'] : '#' ;
         $image_small = isset($img_main['image_small_id']) ? wp_get_attachment_image_src($img_main['image_small_id'], $gbox_adimg_size ):''; 
 		$image_light_default = isset($img_main['image_small_id']) ? wp_get_attachment_image_src($img_main['image_small_id'], 'large' ):''; 
 		$image_light = isset($img_main['image_light_id']) ? wp_get_attachment_image_src($img_main['image_light_id'], 'large' ):'';
-		$img_btn_text =  !empty( $img_main['img_btn_text'])   ? $img_main['img_btn_text'] :__('View large','gbox');
+		$img_btn_text =  !empty( $img_main['img_btn_text'])   ? $img_main['img_btn_text'] :__('View large','gallery-box');
         
             if($image_small){
             $gallery_image = $image_small[0];

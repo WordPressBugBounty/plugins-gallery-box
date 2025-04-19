@@ -14,8 +14,8 @@ require_once( GALLERY_BOX_PATH. '/includes/all-gallery/youtube-gallery/youtube-s
 
 function gallery_box_youtube_gallery($id){
 
-	$head = __('Youtube Video gallery now only available in pro version.','gbox');
-	$msm = __('please update pro then Your gallery will appear once again without any change.','gbox');
+	$head = __('Youtube Video gallery now only available in pro version.','gallery-box');
+	$msm = __('please update pro then Your gallery will appear once again without any change.','gallery-box');
 
 	printf('<div class="upgrade-output"><h2 class="pro-outpot">%s</h2><h5 class="upgrade-txt"> %s</h5><a target="blank" href="'.esc_url('https://wpthemespace.com/product/gallery-box-pro/').'" class="upgrade-btn">'.esc_html('Upgrade Pro').'</a></div>',$head,$msm);
 
@@ -74,7 +74,7 @@ if( $gbox_you_order == 'desc' ){
  $youtube_group = array_reverse($youtube_group);
 }
 	foreach ( (array) $youtube_group as $key => $youtube_main ):
-		$You_title = !empty( $youtube_main['you_title']) ? $youtube_main['you_title'] : __('Youtube gallery','gbox');
+		$You_title = !empty( $youtube_main['you_title']) ? $youtube_main['you_title'] : __('Youtube gallery','gallery-box');
 		$you_caption = !empty( $youtube_main['You_caption']) ? $youtube_main['You_caption'] : $You_title;
 		$you_image = isset($youtube_main['you_image_id']) ? wp_get_attachment_image_src($youtube_main['you_image_id'], $you_thumb_size ):'' ;
         
@@ -82,7 +82,7 @@ if( $gbox_you_order == 'desc' ){
 		$you_url = isset( $youtube_main['you_url']) ? $youtube_main['you_url'] :''; 
 		$you_width = !empty( $youtube_main['you_width'])  ? $youtube_main['you_width'] :'600'; 
 		$you_height = !empty( $youtube_main['you_height']) ? $youtube_main['you_height'] :'400'; 
-		$youtube_button = !empty( $youtube_main['youtube_button']) ? $youtube_main['youtube_button'] :__('Show video','gbox'); 
+		$youtube_button = !empty( $youtube_main['youtube_button']) ? $youtube_main['youtube_button'] :__('Show video','gallery-box'); 
 
         if($you_url){
         $you_id = get_gbox_youtube_id($you_url);

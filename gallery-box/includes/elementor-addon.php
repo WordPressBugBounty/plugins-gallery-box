@@ -34,7 +34,7 @@ class gBoxEWidget extends \Elementor\Widget_Base
      */
     public function get_title()
     {
-        return __('Gallery Box', 'gbox');
+        return __('Gallery Box', 'gallery-box');
     }
 
     /**
@@ -122,7 +122,7 @@ class gBoxEWidget extends \Elementor\Widget_Base
         $this->start_controls_section(
             'mgpl_query',
             [
-                'label' => esc_html__('Gallery Box', 'gbox'),
+                'label' => esc_html__('Gallery Box', 'gallery-box'),
             ]
         );
 
@@ -130,7 +130,7 @@ class gBoxEWidget extends \Elementor\Widget_Base
         $this->add_control(
             'gbox_id',
             [
-                'label' => __('Select Gallery Box Gallery', 'gbox'),
+                'label' => __('Select Gallery Box Gallery', 'gallery-box'),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'label_block' => true,
                 'multiple' => false,

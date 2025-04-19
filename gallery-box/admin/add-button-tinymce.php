@@ -68,7 +68,7 @@ if (! function_exists('gbox_tinymce_shortcode_list_id')) :
 				$tinyMCE_list_gbox[] = array('text' => $post_title, 'value' => '[gallerybox id="' . $post_ID . '"]');
 			endforeach;
 		else:
-			$tinyMCE_list_gbox[] = array('text' => __('No gallery found', 'gbox'), 'value' => '');
+			$tinyMCE_list_gbox[] = array('text' => __('No gallery found', 'gallery-box'), 'value' => '');
 		endif;
 		$gbox_jscode = $tinyMCE_list_gbox;
 		if (is_admin()) {
