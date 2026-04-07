@@ -4,7 +4,7 @@ Donate link: https://wpthemespace.com/donation/
 Tags: gallery, youtube gallery, portfolio gallery, image gallery, iframe gallery
 Requires at least: 5.0
 Requires PHP: 7.4
-Tested up to: 6.8
+Tested up to: 7.0
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -113,13 +113,11 @@ e.g.
 </ol>
 
 ## Privacy Policy
-Gallery Box uses [Appsero](https://appsero.com) SDK to collect some telemetry data upon user's confirmation. This helps us to troubleshoot problems faster & make product improvements.
+Gallery Box uses Pulse SDK to collect some telemetry data upon user's confirmation. This helps us to troubleshoot problems faster & make product improvements.
 
-Appsero SDK **does not gather any data by default.** The SDK only starts gathering basic telemetry data **when a user allows it via the admin notice**. We collect the data to ensure a great user experience for all our users.
+The SDK **does not gather any data by default.** The SDK only starts gathering basic telemetry data **when a user allows it via the admin notice**. We collect the data to ensure a great user experience for all our users.
 
-Integrating Appsero SDK **DOES NOT IMMEDIATELY** start gathering data, **without confirmation from users in any case.**
-
-Learn more about how [Appsero collects and uses this data](https://appsero.com/privacy-policy/).
+The SDK **DOES NOT IMMEDIATELY** start gathering data, **without confirmation from users in any case.**
 
 
 == Frequently Asked Questions  ==
@@ -147,6 +145,18 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 
 
 == Changelog ==
+= 1.7.39 =
+	* Fixed PHP 8.x deprecated and compatibility issues
+	* Fixed count() on non-array values causing TypeError in PHP 8.0+
+	* Fixed undefined variable warnings when plugin options are not set
+	* Fixed parse_url() and parse_str() unsafe usage in YouTube ID parser
+	* Fixed unserialize() security issue in Vimeo gallery with SSL verification
+	* Fixed unsanitized $_GET input in post type messages
+	* Fixed wrong text domain in gallery list function
+	* Fixed wp_get_attachment_image_src() false return not handled in simple gallery
+	* Fixed error suppression operator usage in Vimeo connection check
+	* Updated Elementor widget to use get_settings_for_display() method
+	* Removed Appsero SDK, replaced with Pulse SDK
 = 1.7.38 =
 	* tested WordPress 6.8
 = 1.7.36 =

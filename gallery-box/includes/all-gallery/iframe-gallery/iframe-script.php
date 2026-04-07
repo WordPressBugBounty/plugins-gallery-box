@@ -38,6 +38,8 @@ add_action('gbox_iframe_script', 'gbox_iframe_gallery_script');
 function gbox_irame_masonry_loadmore_active_script($id){
   if( get_option('iframe_style') ){
      $giframe = get_option('iframe_style');
+  } else {
+     $giframe = array();
   }
 
 //Youtube loadmore options
@@ -45,7 +47,9 @@ $iframe_load_button = isset( $giframe['iframe_load_button'] ) ? $giframe['iframe
   $iframe_item_number = isset( $giframe['iframe_item_number'] ) ? $giframe['iframe_item_number'] :10;
 //meta loadmore
 $iframe_settings = get_post_meta(get_the_ID(), 'iframe_settings', true);
+$iframe_settings = is_array($iframe_settings) ? $iframe_settings : array();
 $iframe_main = get_post_meta(get_the_ID(), 'iframe_main', true);
+$iframe_main = is_array($iframe_main) ? $iframe_main : array();
 $iframe_loadmore =  !empty( $iframe_settings[0]['iframe_loadmore'])  ? $iframe_settings[0]['iframe_loadmore'] : 'default';
 
 
@@ -57,7 +61,6 @@ $iframe_loadmore =  !empty( $iframe_settings[0]['iframe_loadmore'])  ? $iframe_s
         }
 // count for Load more button 
   $total_iframe_cunt = count($iframe_main);
-       
 
   //javascript code so the function need to call in script tag
 ?>

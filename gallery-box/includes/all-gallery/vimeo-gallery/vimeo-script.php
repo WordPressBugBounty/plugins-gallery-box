@@ -38,15 +38,19 @@ add_action('gbox_vimeo_script', 'gbox_vimeo_gallery_script');
 function gbox_vimeo_masonry_loadmore_active_script($id){
 	if(get_option('vimeo_style')){
 		$vimeoption = get_option('vimeo_style');
-		}
+	} else {
+		$vimeoption = array();
+	}
 
 //Youtube loadmore options
     $vimeo_load_button = isset( $vimeoption['vimeo_load_button'] ) ? $vimeoption['vimeo_load_button'] :'disable';
     $vimeo_item_number = isset( $vimeoption['vimeo_item_number'] ) ? $vimeoption['vimeo_item_number'] :10;
 //meta loadmore
 $vimeo_settings = get_post_meta($id, 'vimeo_settings', true);
+$vimeo_settings = is_array($vimeo_settings) ? $vimeo_settings : array();
 $vimeo_loadmore =  !empty( $vimeo_settings[0]['vimeo_loadmore'])  ? $vimeo_settings[0]['vimeo_loadmore'] : 'default';
 $vimeo_main = get_post_meta($id, 'vimeo_main', true);
+$vimeo_main = is_array($vimeo_main) ? $vimeo_main : array();
 // count for Load more button 
   $total_vimeo_cunt = count($vimeo_main);
 

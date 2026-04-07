@@ -15,6 +15,8 @@ function gbox_lightbox_active_script($id){
 //javascript code so the function need to call in script tag
 if(get_option('Lightbox_settings')){
 $gbox_lightbox = get_option('Lightbox_settings');
+} else {
+$gbox_lightbox = array();
 }
 $gbox_loader_style = isset( $gbox_lightbox['loader_style'] ) ? $gbox_lightbox['loader_style'] : 'double-bounce'; 	
 $gbox_light_border = isset( $gbox_lightbox['light_border'] ) ? $gbox_lightbox['light_border'] : '0'; 	

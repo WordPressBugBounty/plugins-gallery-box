@@ -39,6 +39,8 @@ $vimeo_group = get_post_meta(get_the_ID(), 'vimeo_main', true);
 
 	if(get_option('vimeo_style')){
 		$gvimeo = get_option('vimeo_style');
+	} else {
+		$gvimeo = array();
 	}
         //loadmore options
     $vimeo_load_button = isset( $gvimeo['vimeo_load_button'] ) ? $gvimeo['vimeo_load_button'] :'enable';
@@ -96,11 +98,15 @@ foreach ( (array) $vimeo_group as $key => $vimeo_main ):
 		if(!empty($vimeo_id ) ){
 			$arrContextOptions=array(
 			    "ssl"=>array(
-			        "verify_peer"=>false,
-			        "verify_peer_name"=>false,
+			        "verify_peer"=>true,
+			        "verify_peer_name"=>true,
 			    ),
 			);
-		$vimg_default = unserialize(file_get_contents('http://vimeo.com/api/v2/video/'.$vimeo_id.'.php', false, stream_context_create($arrContextOptions)));
+		$vimeo_response = file_get_contents('https://vimeo.com/api/v2/video/'.intval($vimeo_id).'.php', false, stream_context_create($arrContextOptions));
+		$vimg_default = ($vimeo_response !== false) ? @unserialize($vimeo_response) : false;
+		if ($vimg_default === false) {
+			$vimg_default = '';
+		}
 		}else{ 
 		$vimg_default ='';
 		}

@@ -38,6 +38,8 @@ if($gimage = get_option('img_style')){
 //Lightbox options
 if(get_option('Lightbox_settings')){
 	$gbox_lightbox = get_option('Lightbox_settings');
+} else {
+	$gbox_lightbox = array();
 }
 $gbox_show_arrow = isset( $gbox_lightbox['show_arrow'] ) ? $gbox_lightbox['show_arrow'] : 'yes'; 
 
@@ -70,6 +72,9 @@ endif;// check carousel slider end
 foreach ( (array) $gbox_simple_imgs as $attachment_id => $attachment_url ):
 
 	$gbox_thumb = wp_get_attachment_image_src( $attachment_id, 'large' );
+	if ( ! $gbox_thumb ) {
+		continue;
+	}
 if( $gbox_simg_layout_type == 'masonry_layout' ){
 	$gbox_count++;
 	if ( $gbox_count % 3 == 0 ){

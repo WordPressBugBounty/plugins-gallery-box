@@ -25,7 +25,7 @@ $img_border = ( isset( $gbimage['img_border'] ) ) ? $gbimage['img_border'] : '0'
 $img_border_color = ( isset( $gbimage['img_border_color'] ) ) ? $gbimage['img_border_color'] : '#ffffff';
 $img_border_type = ( isset( $gbimage['img_border_type'] ) ) ? $gbimage['img_border_type'] : 'solid';
 //loadmore button style options
-$default_img_load_button = isset( $gb_image['img_load_button'] ) ? $gb_image['img_load_button'] :'enable';
+$default_img_load_button = isset( $gbimage['img_load_button'] ) ? $gbimage['img_load_button'] :'enable';
 $gbox_img_load_position = ( isset( $gbimage['img_load_position'] ) ) ? $gbimage['img_load_position'] : 'full'; 
 $img_load_color = ( isset( $gbimage['img_load_color'] ) ) ? $gbimage['img_load_color'] : '#000000'; 
 $img_load_bgcolor = ( isset( $gbimage['img_load_bgcolor'] ) ) ? $gbimage['img_load_bgcolor'] : '#cccccc'; 

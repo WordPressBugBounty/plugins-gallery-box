@@ -157,7 +157,7 @@ class gBoxEWidget extends \Elementor\Widget_Base
     {
 
         $settings = $this->get_settings_for_display();
-        $gbox_id = $this->get_settings('gbox_id');
+        $gbox_id = isset($settings['gbox_id']) ? intval($settings['gbox_id']) : 0;
 
         echo do_shortcode('[gallerybox id="' . $gbox_id . '"]');
     }

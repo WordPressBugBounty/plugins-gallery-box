@@ -15,30 +15,34 @@ function get_gbox_youtube_id($url)
 {
     $video_id = false;
 
-    $url = parse_url($url);
-    if (strcasecmp($url['host'], 'youtu.be') === 0)
+    $parsed_url = parse_url($url);
+    if (!is_array($parsed_url) || !isset($parsed_url['host'])) {
+        return false;
+    }
+    if (strcasecmp($parsed_url['host'], 'youtu.be') === 0)
     {
         #### (dontcare)://youtu.be/<video id>
-        $video_id = substr($url['path'], 1);
+        $video_id = isset($parsed_url['path']) ? substr($parsed_url['path'], 1) : false;
     }
-    elseif (strcasecmp($url['host'], 'www.youtube.com') === 0)
+    elseif (strcasecmp($parsed_url['host'], 'www.youtube.com') === 0)
     {
-        if (isset($url['query']))
+        if (isset($parsed_url['query']))
         {
-            parse_str($url['query'], $url['query']);
-            if (isset($url['query']['v']))
+            $query_params = array();
+            parse_str($parsed_url['query'], $query_params);
+            if (isset($query_params['v']))
             {
                 #### (dontcare)://www.youtube.com/(dontcare)?v=<video id>
-                $video_id = $url['query']['v'];
+                $video_id = $query_params['v'];
             }
         }
-        if ($video_id == false)
+        if ($video_id == false && isset($parsed_url['path']))
         {
-            $url['path'] = explode('/', substr($url['path'], 1));
-            if (in_array($url['path'][0], array('e', 'embed', 'v')))
+            $path_parts = explode('/', substr($parsed_url['path'], 1));
+            if (isset($path_parts[0]) && in_array($path_parts[0], array('e', 'embed', 'v')) && isset($path_parts[1]))
             {
                 #### (dontcare)://www.youtube.com/(whitelist)/<video id>
-                $video_id = $url['path'][1];
+                $video_id = $path_parts[1];
             }
         }
     }
@@ -67,7 +71,7 @@ endif;
 function isVimeoConnected()
 {
     // use 80 for http or 443 for https protocol
-    $connected = @fsockopen("https://www.vimeo.com/", 443);
+    $connected = fsockopen("www.vimeo.com", 443, $errno, $errstr, 5);
     if ($connected){
         fclose($connected);
         return true; 
@@ -82,7 +86,7 @@ function isVimeoConnected()
 function gbox_gallery_list( $post_type = 'gallery_box' ){
     $options = array();
     $gbox_untitle = esc_html__('Untitled gallery id','gallery-box');
-    $options['0'] = __('Select','magical-addons-for-elementor');
+    $options['0'] = __('Select','gallery-box');
    // $perpage = wooaddons_get_option( 'loadproductlimit', 'wooaddons_others_tabs', '20' );
     $all_post = array( 'posts_per_page' => -1, 'post_type'=> $post_type );
     $post_terms = get_posts( $all_post );

@@ -81,7 +81,7 @@ if (!function_exists('gbox_updated_messages')) :
 			3  => __('Gallery field deleted.', 'gallery-box'),
 			4  => __('Gallery item updated.', 'gallery-box'),
 			/* translators: %s: date and time of the revision */
-			5  => isset($_GET['revision']) ? sprintf(__('Gallery restored to revision from %s', 'gallery-box'), wp_post_revision_title((int) $_GET['revision'], false)) : false,
+			5  => isset($_GET['revision']) ? sprintf(__('Gallery restored to revision from %s', 'gallery-box'), wp_post_revision_title((int) sanitize_text_field(wp_unslash($_GET['revision'])), false)) : false,
 			6  => sprintf(__('Gallery published. Shortcode is : <strong>%s</strong>', 'gallery-box'), $gallery_shortcode),
 			7  => sprintf(__('Gallery saved. Shortcode is : <strong>%s</strong>', 'gallery-box'), $gallery_shortcode),
 			8 => sprintf(__('Gallery submitted. Shortcode is : <strong>%s</strong>', 'gallery-box'), $gallery_shortcode),

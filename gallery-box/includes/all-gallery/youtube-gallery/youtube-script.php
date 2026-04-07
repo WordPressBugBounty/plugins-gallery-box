@@ -44,15 +44,19 @@ add_action('gbox_youtube_script', 'gbox_youtube_gallery_script');
 function gbox_youtube_masonry_loadmore_active_script($id){
 	if($gbyoutube = get_option('youtube_style')){
 		$gbyoutube = get_option('youtube_style');
-		}
+	} else {
+		$gbyoutube = array();
+	}
 
 //Youtube loadmore options
     $you_load_button = isset( $gbyoutube['you_load_button'] ) ? $gbyoutube['you_load_button'] :'disable';
     $you_item_number = isset( $gbyoutube['you_item_number'] ) ? $gbyoutube['you_item_number'] :10;
 //meta loadmore
 $you_settings = get_post_meta($id, 'you_settings', true);
+$you_settings = is_array($you_settings) ? $you_settings : array();
 $you_loadmore =  !empty( $you_settings[0]['you_loadmore'])  ? $you_settings[0]['you_loadmore'] : 'default';
 $youtube_main = get_post_meta($id, 'youtube_main', true);
+$youtube_main = is_array($youtube_main) ? $youtube_main : array();
 // count for Load more button 
   $total_youtube_cunt = count($youtube_main);
 

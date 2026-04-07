@@ -38,6 +38,8 @@ global $post;
 //for typography option
    if(get_option('Lightbox_settings')){
 $gbox_lightbox = get_option('Lightbox_settings');
+} else {
+$gbox_lightbox = array();
 }
 $gbox_use_typography = isset( $gbox_lightbox['use_typography'] ) ? $gbox_lightbox['use_typography'] : 'yes'; 
 	?>

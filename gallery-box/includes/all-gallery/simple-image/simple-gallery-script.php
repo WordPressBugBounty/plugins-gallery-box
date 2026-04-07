@@ -108,8 +108,10 @@ $img_item_number = isset( $gb_image['img_item_number'] ) ? $gb_image['img_item_n
 
 //meta loadmore
 $simg_main = get_post_meta( get_the_ID(), 'simg_main', 1 );
+$simg_main = is_array($simg_main) ? $simg_main : array();
 $gbox_simg_loadmore =  !empty( $simg_main[0]['simg_loadmore'])  ? $simg_main[0]['simg_loadmore'] : 'default';
 $simple_imgs = get_post_meta($id, 'simple_imgs', true);
+$simple_imgs = is_array($simple_imgs) ? $simple_imgs : array();
 // count for Load more button 
   $total_simgaes_cunt = count($simple_imgs);
 

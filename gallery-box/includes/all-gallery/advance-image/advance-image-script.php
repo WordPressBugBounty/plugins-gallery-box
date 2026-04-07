@@ -45,8 +45,10 @@ $img_item_number = isset( $gb_image['img_item_number'] ) ? $gb_image['img_item_n
 
 //meta loadmore
 $settings_main = get_post_meta($id, 'settings_main', true);
+$settings_main = is_array($settings_main) ? $settings_main : array();
 $gbox_uniqe_loadmore =  !empty( $settings_main[0]['uniqe_loadmore'])  ? $settings_main[0]['uniqe_loadmore'] : 'default';
 $img_main = get_post_meta($id, 'img_main', true);
+$img_main = is_array($img_main) ? $img_main : array();
 // count for Load more button 
   $total_imgaes_cunt = count($img_main);
 
