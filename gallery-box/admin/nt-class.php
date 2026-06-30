@@ -52,10 +52,10 @@ class WpSpace_Recommend_WPEPP {
         $installed = is_dir( WP_PLUGIN_DIR . '/' . self::PLUGIN_SLUG );
 
         if ( $installed ) {
-            $button_text = esc_html__( 'Activate Now', 'click-to-top' );
+            $button_text = esc_html__( 'Activate Now', 'gallery-box' );
             $data_action = 'activate';
         } else {
-            $button_text = esc_html__( 'Install & Activate', 'click-to-top' );
+            $button_text = esc_html__( 'Install & Activate', 'gallery-box' );
             $data_action = 'install';
         }
 
@@ -75,18 +75,18 @@ class WpSpace_Recommend_WPEPP {
         <div id="<?php echo esc_attr( $uid ); ?>" class="notice notice-info is-dismissible" style="padding:14px 20px 18px; border-left-color:#2271b1;">
             <p style="font-size:14px; margin-bottom:10px;">
                 <span style="font-size:16px; margin-right:4px;">&#x1f6e1;</span>
-                <strong><?php esc_html_e( 'Protect Your Site — Free Security Plugin', 'click-to-top' ); ?></strong>
+                <strong><?php esc_html_e( 'Protect Your Site — Free Security Plugin', 'gallery-box' ); ?></strong>
             </p>
             <p style="margin-bottom:12px;">
-                <?php esc_html_e( 'Your WordPress site may be vulnerable to brute force attacks, AI content scrapers, and unauthorized access.', 'click-to-top' ); ?>
-                <strong>WPEPP</strong> <?php esc_html_e( 'fixes that in one click:', 'click-to-top' ); ?>
+                <?php esc_html_e( 'Your WordPress site may be vulnerable to brute force attacks, AI content scrapers, and unauthorized access.', 'gallery-box' ); ?>
+                <strong>WPEPP</strong> <?php esc_html_e( 'fixes that in one click:', 'gallery-box' ); ?>
             </p>
             <ul style="margin:0 0 14px 18px; list-style:disc; line-height:1.8;">
-                <li><?php esc_html_e( 'Limit Login Attempts & block brute force attacks', 'click-to-top' ); ?></li>
-                <li><?php esc_html_e( 'Block AI Crawlers — stop GPTBot, CCBot & others from scraping your content', 'click-to-top' ); ?></li>
-                <li><?php esc_html_e( 'Disable XML-RPC, hide WP version & block user enumeration', 'click-to-top' ); ?></li>
-                <li><?php esc_html_e( 'Customize the login page with live preview', 'click-to-top' ); ?></li>
-                <li><?php esc_html_e( 'Password protect pages & lock your entire site', 'click-to-top' ); ?></li>
+                <li><?php esc_html_e( 'Limit Login Attempts & block brute force attacks', 'gallery-box' ); ?></li>
+                <li><?php esc_html_e( 'Block AI Crawlers — stop GPTBot, CCBot & others from scraping your content', 'gallery-box' ); ?></li>
+                <li><?php esc_html_e( 'Disable XML-RPC, hide WP version & block user enumeration', 'gallery-box' ); ?></li>
+                <li><?php esc_html_e( 'Customize the login page with live preview', 'gallery-box' ); ?></li>
+                <li><?php esc_html_e( 'Password protect pages & lock your entire site', 'gallery-box' ); ?></li>
             </ul>
             <p style="margin:0;">
                 <button type="button"
@@ -102,7 +102,7 @@ class WpSpace_Recommend_WPEPP {
                 </button>
 
                 <a href="<?php echo esc_url( $dismiss_url ); ?>" style="color:#787c82; text-decoration:none;">
-                    <?php esc_html_e( 'No thanks', 'click-to-top' ); ?>
+                    <?php esc_html_e( 'No thanks', 'gallery-box' ); ?>
                 </a>
                 <span class="wpspace-wpepp-status" style="margin-left:10px; font-style:italic; color:#666;"></span>
             </p>
@@ -123,14 +123,14 @@ class WpSpace_Recommend_WPEPP {
 
         $ajax_action = self::AJAX_ACTION;
         $i18n = array(
-            'installing'  => esc_js( __( 'Installing...', 'click-to-top' ) ),
-            'activating'  => esc_js( __( 'Activating...', 'click-to-top' ) ),
-            'active'      => esc_js( __( 'Active!', 'click-to-top' ) ),
-            'installBtn'  => esc_js( __( 'Install & Activate', 'click-to-top' ) ),
-            'activateBtn' => esc_js( __( 'Activate Now', 'click-to-top' ) ),
-            'installFail' => esc_js( __( 'Install failed.', 'click-to-top' ) ),
-            'activeFail'  => esc_js( __( 'Activation failed.', 'click-to-top' ) ),
-            'success'     => esc_js( __( 'Plugin activated successfully.', 'click-to-top' ) ),
+            'installing'  => esc_js( __( 'Installing...', 'gallery-box' ) ),
+            'activating'  => esc_js( __( 'Activating...', 'gallery-box' ) ),
+            'active'      => esc_js( __( 'Active!', 'gallery-box' ) ),
+            'installBtn'  => esc_js( __( 'Install & Activate', 'gallery-box' ) ),
+            'activateBtn' => esc_js( __( 'Activate Now', 'gallery-box' ) ),
+            'installFail' => esc_js( __( 'Install failed.', 'gallery-box' ) ),
+            'activeFail'  => esc_js( __( 'Activation failed.', 'gallery-box' ) ),
+            'success'     => esc_js( __( 'Plugin activated successfully.', 'gallery-box' ) ),
         );
         ?>
         <script>
@@ -236,13 +236,13 @@ class WpSpace_Recommend_WPEPP {
         check_ajax_referer( 'wpspace-activate-' . self::PLUGIN_SLUG );
 
         if ( ! current_user_can( 'activate_plugins' ) ) {
-            wp_send_json_error( array( 'message' => __( 'Permission denied.', 'click-to-top' ) ) );
+            wp_send_json_error( array( 'message' => __( 'Permission denied.', 'gallery-box' ) ) );
         }
 
         $plugin = isset( $_POST['plugin'] ) ? sanitize_text_field( wp_unslash( $_POST['plugin'] ) ) : '';
 
         if ( empty( $plugin ) || $plugin !== self::PLUGIN_BASENAME ) {
-            wp_send_json_error( array( 'message' => __( 'Invalid plugin.', 'click-to-top' ) ) );
+            wp_send_json_error( array( 'message' => __( 'Invalid plugin.', 'gallery-box' ) ) );
         }
 
         $result = activate_plugin( $plugin );
@@ -255,7 +255,7 @@ class WpSpace_Recommend_WPEPP {
     }
 }
 
-new WpSpace_Recommend_WPEPP();
+// new WpSpace_Recommend_WPEPP();
 
 endif; // class_exists
 
@@ -271,12 +271,12 @@ if ( ! function_exists( 'spacehide_go_me' ) ) :
         ?>
         <div class="notice notice-success is-dismissible" style="padding:10px 15px 20px;">
             <p>
-                <strong><span style="color:red;"><?php esc_html_e( 'Hi Buddy!! Recommended WordPress Theme for you:', 'click-to-top' ); ?></span>
-                <span style="color:green;"><?php esc_html_e( 'If you find a Secure, SEO friendly, full functional premium WordPress theme for your site then', 'click-to-top' ); ?></span></strong>
-                <a href="<?php echo esc_url( $url ); ?>" target="_blank"><?php esc_html_e( 'see here', 'click-to-top' ); ?></a>.
+                <strong><span style="color:red;"><?php esc_html_e( 'Hi Buddy!! Recommended WordPress Theme for you:', 'gallery-box' ); ?></span>
+                <span style="color:green;"><?php esc_html_e( 'If you find a Secure, SEO friendly, full functional premium WordPress theme for your site then', 'gallery-box' ); ?></span></strong>
+                <a href="<?php echo esc_url( $url ); ?>" target="_blank"><?php esc_html_e( 'see here', 'gallery-box' ); ?></a>.
             </p>
             <a target="_blank" class="button button-danger" href="<?php echo esc_url( $url ); ?>" style="margin-right:10px;">
-                <?php esc_html_e( 'View WordPress Theme', 'click-to-top' ); ?>
+                <?php esc_html_e( 'View WordPress Theme', 'gallery-box' ); ?>
             </a>
         </div>
         <?php

@@ -113,4 +113,4 @@ function prefix_ms_plugin_update_message($file, $plugin)
         );
     }
 }
-add_action('after_plugin_row_wp-gallery-box/gallery-box.php', 'prefix_ms_plugin_update_message', 10, 2);
+add_action('after_plugin_row_gallery-box/gallery-box.php', 'prefix_ms_plugin_update_message', 10, 2);

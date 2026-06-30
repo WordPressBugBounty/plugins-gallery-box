@@ -217,11 +217,11 @@ if (!class_exists('nGalleryBox_main_options')) :
                         'type'     => 'select',
                         'default' => 'ehover12',
                         'options'          => array(
-                            'ehover1' => __('Animation One', 'cmb2'),
-                            'ehover2'   => __('Animation Two', 'cmb2'),
-                            'ehover3'     => __('Animation Three', 'cmb2'),
-                            'ehover4'     => __('Animation Four', 'cmb2'),
-                            'ehover5'     => __('Animation Five', 'cmb2'),
+                            'ehover1' => __('Animation One', 'gallery-box'),
+                            'ehover2'   => __('Animation Two', 'gallery-box'),
+                            'ehover3'     => __('Animation Three', 'gallery-box'),
+                            'ehover4'     => __('Animation Four', 'gallery-box'),
+                            'ehover5'     => __('Animation Five', 'gallery-box'),
 
                         )
                     ),
@@ -424,11 +424,11 @@ if (!class_exists('nGalleryBox_main_options')) :
                         'type'     => 'select',
                         'default' => 'ehover5',
                         'options'          => array(
-                            'ehover1' => __('Animation One', 'cmb2'),
-                            'ehover2'   => __('Animation Two', 'cmb2'),
-                            'ehover3'     => __('Animation Three', 'cmb2'),
-                            'ehover4'     => __('Animation Four', 'cmb2'),
-                            'ehover5'     => __('Animation Five', 'cmb2'),
+                            'ehover1' => __('Animation One', 'gallery-box'),
+                            'ehover2'   => __('Animation Two', 'gallery-box'),
+                            'ehover3'     => __('Animation Three', 'gallery-box'),
+                            'ehover4'     => __('Animation Four', 'gallery-box'),
+                            'ehover5'     => __('Animation Five', 'gallery-box'),
 
                         )
                     ),
@@ -631,11 +631,11 @@ if (!class_exists('nGalleryBox_main_options')) :
                         'type'              => 'select',
                         'default' => 'ehover3',
                         'options'          => array(
-                            'ehover1' => __('Animation One', 'cmb2'),
-                            'ehover2'   => __('Animation Two', 'cmb2'),
-                            'ehover3'     => __('Animation Three', 'cmb2'),
-                            'ehover4'     => __('Animation Four', 'cmb2'),
-                            'ehover5'     => __('Animation Five', 'cmb2'),
+                            'ehover1' => __('Animation One', 'gallery-box'),
+                            'ehover2'   => __('Animation Two', 'gallery-box'),
+                            'ehover3'     => __('Animation Three', 'gallery-box'),
+                            'ehover4'     => __('Animation Four', 'gallery-box'),
+                            'ehover5'     => __('Animation Five', 'gallery-box'),
 
                         )
                     ),
@@ -828,11 +828,11 @@ if (!class_exists('nGalleryBox_main_options')) :
                         'type'              => 'select',
                         'default' => 'ehover12',
                         'options'          => array(
-                            'ehover1' => __('Animation One', 'cmb2'),
-                            'ehover2'   => __('Animation Two', 'cmb2'),
-                            'ehover3'     => __('Animation Three', 'cmb2'),
-                            'ehover4'     => __('Animation Four', 'cmb2'),
-                            'ehover5'     => __('Animation Five', 'cmb2'),
+                            'ehover1' => __('Animation One', 'gallery-box'),
+                            'ehover2'   => __('Animation Two', 'gallery-box'),
+                            'ehover3'     => __('Animation Three', 'gallery-box'),
+                            'ehover4'     => __('Animation Four', 'gallery-box'),
+                            'ehover5'     => __('Animation Five', 'gallery-box'),
 
                         )
                     ),

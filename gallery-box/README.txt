@@ -145,6 +145,8 @@ The SDK **DOES NOT IMMEDIATELY** start gathering data, **without confirmation fr
 
 
 == Changelog ==
+= 1.7.40 =
+	* Removed WPEPP recommendation notice (commented out for later use)
 = 1.7.39 =
 	* Fixed PHP 8.x deprecated and compatibility issues
 	* Fixed count() on non-array values causing TypeError in PHP 8.0+

@@ -38,20 +38,20 @@ endif;
 add_action( 'vc_before_init', 'Gallery_box_integrateWithVC' );
 function Gallery_box_integrateWithVC() {
    vc_map( array(
-      "name" => __( "Gallery Box", "gbox" ),
-	  "description" => __( "Publish your gallery from Gallery Box", "gbox" ),
+      "name" => __( "Gallery Box", "gallery-box" ),
+	  "description" => __( "Publish your gallery from Gallery Box", "gallery-box" ),
       "base" => "GalleryBox",
       "class" => "",
-      "category" => __( "Content", "gbox"),
+      "category" => __( "Content", "gallery-box"),
      "icon" => plugin_dir_url( dirname( __FILE__ ) ) ."/images/galleryBox-icon.png",
       "params" => array(
         array(
             "type" => "dropdown",
             "class" => "",
-            "heading" => __( "Select your gallery", "ppc" ),
+            "heading" => __( "Select your gallery", "gallery-box" ),
             "param_name" => "id",
            'value' => gallery_box_visual_term_optionss(),
-            "description" => __( "First create gallery in Gallery Box menu and then select gallery for publish .", "ppc" )
+            "description" => __( "First create gallery in Gallery Box menu and then select gallery for publish .", "gallery-box" )
          )
       )
    ) );
