@@ -985,8 +985,11 @@ if (!class_exists('nGalleryBox_main_options')) :
         function plugin_page()
         {
             echo '<div class="wrap easy-solution">';
-            echo '<a href="http://wpthemespace.com/product/x-blog/" target="_blank"> <img src="https://wpthemespace.com/wp-content/uploads/2019/01/xblog-pro.png' . '" alt="X blog pro" /></a>';
-            echo '<h1>' . esc_html__('Gallery box settings', 'gallery-box') . '</h1>';
+            if (class_exists('gboxAdminInfo')) {
+                gboxAdminInfo::render_aime_header_banner();
+            }
+            echo '<h1 class="wp-heading-inline">' . esc_html__('Gallery box settings', 'gallery-box') . '</h1>';
+            echo '<hr class="wp-header-end">';
             echo '<div class="welcome-panel">';
             $this->settings_api->show_navigation();
             $this->settings_api->show_forms();

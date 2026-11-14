@@ -8,7 +8,10 @@
  * Plugin Name:       Gallery Box
  * Plugin URI:        https://wpthemespace.com/product/gallery-box-pro/
  * Description:       You can create awesome image, portfolio, audio, video and i-frame gellery with lots of effects By this plugin.
- * Version:           1.7.40
+ * Version:           1.7.41
+ * Requires at least: 5.0
+ * Tested up to:      7.1
+ * Requires PHP:      7.4
  * Author:            Noor alam
  * Author URI:        http://wpthemespace.com
  * License:           GPL-2.0+
@@ -51,6 +54,7 @@ if (is_admin()) {
     require_once(GALLERY_BOX_PATH . '/admin/src/cmb2-radio-image.php');
     require_once(GALLERY_BOX_PATH . '/admin/gallerybox-visual-composer.php');
     require_once(GALLERY_BOX_PATH . '/admin/nt-class.php');
+    require_once(GALLERY_BOX_PATH . '/admin/gbox-admin-info.php');
 }
 
 
@@ -343,4 +347,5 @@ function gallerybox_ai_marketing_notice() {
     </div>
     <?php
 }
-add_action( 'admin_notices', 'gallerybox_ai_marketing_notice' );
+// Legacy notice replaced by modern rotating gboxAdminInfo banner
+// add_action( 'admin_notices', 'gallerybox_ai_marketing_notice' );

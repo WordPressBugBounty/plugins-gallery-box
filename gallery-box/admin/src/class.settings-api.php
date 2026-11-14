@@ -134,7 +134,7 @@ if (! class_exists('ngallery_box_settings')):
             );
             $html  .= $this->get_field_description($args);
 
-            echo wp_kses_post($html);
+            echo $html;
         }
 
         function callback_url($args)
@@ -158,7 +158,7 @@ if (! class_exists('ngallery_box_settings')):
             $html  .= sprintf('%1$s</label>', esc_html($args['desc']));
             $html  .= '</fieldset>';
 
-            echo wp_kses_post($html);
+            echo $html;
         }
 
         function callback_multicheck($args)
@@ -176,7 +176,7 @@ if (! class_exists('ngallery_box_settings')):
             $html .= $this->get_field_description($args);
             $html .= '</fieldset>';
 
-            echo wp_kses_post($html);
+            echo $html;
         }
 
         function callback_select($args)
@@ -192,7 +192,42 @@ if (! class_exists('ngallery_box_settings')):
             $html .= sprintf('</select>');
             $html .= $this->get_field_description($args);
 
-            echo wp_kses_post($html);
+            echo $html;
+        }
+
+        function callback_radio($args)
+        {
+            $value = $this->get_option($args['id'], $args['section'], $args['std']);
+            $html  = '<fieldset>';
+
+            foreach ($args['options'] as $key => $label) {
+                $html .= sprintf('<label for="wpuf-%1$s[%2$s][%3$s]">', esc_attr($args['section']), esc_attr($args['id']), esc_attr($key));
+                $html .= sprintf('<input type="radio" class="radio" id="wpuf-%1$s[%2$s][%3$s]" name="%1$s[%2$s]" value="%3$s" %4$s />', esc_attr($args['section']), esc_attr($args['id']), esc_attr($key), checked($value, $key, false));
+                $html .= sprintf('%1$s</label><br>', esc_html($label));
+            }
+
+            $html .= $this->get_field_description($args);
+            $html .= '</fieldset>';
+
+            echo $html;
+        }
+
+        function callback_color($args)
+        {
+            $value = esc_attr($this->get_option($args['id'], $args['section'], $args['std']));
+            $size  = isset($args['size']) && !is_null($args['size']) ? $args['size'] : 'regular';
+
+            $html  = sprintf('<input type="text" class="%1$s-text wp-color-picker-field" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s" data-default-color="%5$s" />', esc_attr($size), esc_attr($args['section']), esc_attr($args['id']), $value, esc_attr($args['std']));
+            $html  .= $this->get_field_description($args);
+
+            echo $html;
+        }
+
+        public function __call($name, $arguments)
+        {
+            if (strpos($name, 'callback_') === 0 && isset($arguments[0])) {
+                $this->callback_text($arguments[0]);
+            }
         }
 
         function callback_textarea($args)
@@ -203,7 +238,7 @@ if (! class_exists('ngallery_box_settings')):
             $html  = sprintf('<textarea rows="5" cols="55" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]">%4$s</textarea>', $size, esc_attr($args['section']), esc_attr($args['id']), $value);
             $html  .= $this->get_field_description($args);
 
-            echo wp_kses_post($html);
+            echo $html;
         }
 
         function sanitize_options($options)
@@ -284,7 +319,9 @@ if (! class_exists('ngallery_box_settings')):
         ?>
             <script>
                 jQuery(document).ready(function($) {
-                    $('.wp-color-picker-field').wpColorPicker();
+                    if ($.fn.wpColorPicker) {
+                        $('.wp-color-picker-field').wpColorPicker();
+                    }
                     $('.group').hide();
                     var activetab = '';
                     if (typeof(localStorage) != 'undefined') {

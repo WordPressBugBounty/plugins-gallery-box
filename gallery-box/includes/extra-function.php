@@ -87,8 +87,11 @@ function gbox_gallery_list( $post_type = 'gallery_box' ){
     $options = array();
     $gbox_untitle = esc_html__('Untitled gallery id','gallery-box');
     $options['0'] = __('Select','gallery-box');
-   // $perpage = wooaddons_get_option( 'loadproductlimit', 'wooaddons_others_tabs', '20' );
-    $all_post = array( 'posts_per_page' => -1, 'post_type'=> $post_type );
+    $all_post = array(
+        'posts_per_page' => 200,
+        'post_type'      => $post_type,
+        'no_found_rows'  => true,
+    );
     $post_terms = get_posts( $all_post );
     if ( ! empty( $post_terms ) && ! is_wp_error( $post_terms ) ){
         foreach ( $post_terms as $term ) {
@@ -98,6 +101,6 @@ function gbox_gallery_list( $post_type = 'gallery_box' ){
                 $options[ $term->ID ] = $term->post_title;
             }
         }
-        return $options;
     }
+    return $options;
 }
