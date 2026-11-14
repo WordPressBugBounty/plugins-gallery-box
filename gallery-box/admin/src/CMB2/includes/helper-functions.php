@@ -315,14 +315,62 @@ function cmb2_print_metabox_form( $meta_box, $object_id = 0, $args = array() ) {
 	$cmb->object_type( $args['object_type'] );
 
 	// Save the metabox if it's been submitted
-	// check permissions
-	// @todo more hardening?
+	// Check user permissions for the object being modified.
+	$can_save_object = false;
+	$custom_cap      = $cmb->prop( 'capability' );
+
+	if ( $custom_cap && current_user_can( $custom_cap, $object_id ) ) {
+		$can_save_object = true;
+	} else {
+		$obj_type = $cmb->object_type();
+		switch ( $obj_type ) {
+			case 'post':
+				$post_type     = get_post_type( $object_id );
+				$post_type_obj = $post_type ? get_post_type_object( $post_type ) : null;
+				if ( $post_type_obj && isset( $post_type_obj->cap->edit_post ) ) {
+					$can_save_object = current_user_can( $post_type_obj->cap->edit_post, $object_id );
+				} else {
+					$can_save_object = current_user_can( 'edit_post', $object_id );
+				}
+				break;
+
+			case 'user':
+				$can_save_object = current_user_can( 'edit_user', $object_id );
+				break;
+
+			case 'comment':
+				$can_save_object = current_user_can( 'moderate_comments', $object_id );
+				break;
+
+			case 'term':
+				$term = get_term( $object_id );
+				if ( $term && ! is_wp_error( $term ) ) {
+					$tax_obj = get_taxonomy( $term->taxonomy );
+					if ( isset( $tax_obj->cap->edit_terms ) ) {
+						$can_save_object = current_user_can( $tax_obj->cap->edit_terms );
+					}
+				}
+				break;
+
+			case 'options-page':
+				$can_save_object = current_user_can( 'manage_options' );
+				break;
+
+			default:
+				$can_save_object = current_user_can( 'edit_post', $object_id ) || current_user_can( 'manage_options' );
+				break;
+		}
+	}
+
+	$can_save_object = apply_filters( 'cmb2_can_save_object', $can_save_object, $object_id, $cmb->object_type(), $cmb );
+
 	if (
 		$cmb->prop( 'save_fields' )
 		// check nonce.
 		&& isset( $_POST['submit-cmb'], $_POST['object_id'], $_POST[ $cmb->nonce() ] )
 		&& wp_verify_nonce( $_POST[ $cmb->nonce() ], $cmb->nonce() )
 		&& $object_id && $_POST['object_id'] == $object_id
+		&& $can_save_object
 	) {
 		$cmb->save_fields( $object_id, $cmb->object_type(), $_POST );
 	}

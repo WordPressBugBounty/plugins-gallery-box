@@ -144,6 +144,11 @@ class Client {
 	 * @return array|\WP_Error
 	 */
 	public function send_request( $params, $route, $blocking = false ) {
+		// Strictly enforce opt-in: Never send tracking data unless user explicitly opted in.
+		if ( 'track' === $route && 'yes' !== get_option( $this->slug . '_pulse_tracking', 'no' ) ) {
+			return false;
+		}
+
 		return wp_remote_post(
 			$this->endpoint() . $route,
 			array(

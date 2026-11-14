@@ -597,7 +597,7 @@ class gboxAdminInfo
             return;
         }
 
-        $version = defined('WP_DEBUG') && WP_DEBUG ? time() : '1.7.41.1';
+        $version = defined('WP_DEBUG') && WP_DEBUG ? time() : '1.7.42';
         wp_enqueue_style('gbox-admin-info', plugins_url('/assets/css/gbox-admin-info.css', dirname(__FILE__)), array(), $version, 'all');
         wp_enqueue_script('gbox-admin-info', plugins_url('/assets/js/gbox-admin-info.js', dirname(__FILE__)), array('jquery'), $version, true);
 

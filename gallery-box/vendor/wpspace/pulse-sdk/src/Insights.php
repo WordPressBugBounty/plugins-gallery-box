@@ -117,14 +117,12 @@ class Insights {
 
 		$allowed = get_option( $this->client->slug . '_pulse_tracking', '' );
 
-		if ( 'yes' === $allowed ) {
-			$data          = $this->get_tracking_data();
-			$data['event'] = 'activate';
-		} else {
-			$data          = $this->get_basic_tracking_data();
-			$data['event'] = 'activate';
+		if ( 'yes' !== $allowed ) {
+			return;
 		}
 
+		$data          = $this->get_tracking_data();
+		$data['event'] = 'activate';
 		$this->client->send_request( $data, 'track' );
 	}
 
@@ -239,7 +237,7 @@ class Insights {
 	}
 
 	/**
-	 * Opt out: disable tracking, unschedule cron, send basic data.
+	 * Opt out: disable tracking and unschedule cron. No data is sent.
 	 *
 	 * @return void
 	 */
@@ -247,11 +245,7 @@ class Insights {
 		update_option( $this->client->slug . '_pulse_tracking', 'no' );
 
 		$this->clear_schedule_event();
-
-		// Still send basic data so site appears in the dashboard.
-		$data          = $this->get_basic_tracking_data();
-		$data['event'] = 'activate';
-		$this->client->send_request( $data, 'track' );
+		delete_option( $this->client->slug . '_pulse_last_send' );
 	}
 
 	// ------------------------------------------------------------------
@@ -322,30 +316,12 @@ class Insights {
 	}
 
 	/**
-	 * Collect basic (non-diagnostic) tracking data.
-	 *
-	 * Sent when the user has NOT opted in. Only includes identifying
-	 * information: name, email, site URL, IP (for country), and
-	 * plugin version. No server/WP/plugin diagnostic info.
+	 * Returns empty array when tracking is not opted in.
 	 *
 	 * @return array
 	 */
 	public function get_basic_tracking_data() {
-		$current_user = wp_get_current_user();
-
-		return array(
-			'hash'             => $this->client->hash,
-			'slug'             => $this->client->slug,
-			'url'              => esc_url( home_url() ),
-			'site'             => $this->get_site_name(),
-			'admin_email'      => get_option( 'admin_email' ),
-			'first_name'       => $current_user->first_name ?? '',
-			'last_name'        => $current_user->last_name ?? '',
-			'version'          => $this->get_plugin_version(),
-			'is_local'         => $this->client->is_local_server(),
-			'ip_address'       => $this->get_user_ip_address(),
-			'tracking_skipped' => true,
-		);
+		return array();
 	}
 
 	// ------------------------------------------------------------------
@@ -355,9 +331,7 @@ class Insights {
 	/**
 	 * Runs on plugin activation.
 	 *
-	 * Always sends basic data (name, email, site URL) so the site
-	 * appears in the dashboard immediately. Full diagnostic data
-	 * is only sent if the user has opted in.
+	 * Only sends diagnostic data if user has previously opted in.
 	 *
 	 * @return void
 	 */
@@ -369,11 +343,6 @@ class Insights {
 			delete_option( $this->client->slug . '_pulse_last_send' );
 
 			$data          = $this->get_tracking_data();
-			$data['event'] = 'activate';
-			$this->client->send_request( $data, 'track' );
-		} else {
-			// Send basic data even if not opted in so the site appears in the list.
-			$data          = $this->get_basic_tracking_data();
 			$data['event'] = 'activate';
 			$this->client->send_request( $data, 'track' );
 		}

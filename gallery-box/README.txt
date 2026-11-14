@@ -5,7 +5,7 @@ Tags: gallery, youtube gallery, portfolio gallery, image gallery, iframe gallery
 Requires at least: 5.0
 Requires PHP: 7.4
 Tested up to: 7.1
-Stable tag: trunk
+Stable tag: 1.7.42
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -145,11 +145,16 @@ The SDK **DOES NOT IMMEDIATELY** start gathering data, **without confirmation fr
 
 
 == Changelog ==
-= 1.7.41 =
+= 1.7.42 =
+	* Security: Removed automatic background plugin installation and cron events.
+	* Security: Enforced strict administrator opt-in consent for telemetry tracking; zero data sent without explicit consent.
+	* Security: Added capability-based object authorization checks when saving CMB2 metabox fields.
 	* Tweak: Tested and confirmed compatibility up to WordPress 7.1.
 	* Fix: Resolved settings panel fields rendering issue under PHP 8.x.
 	* Fix: Enhanced PHP 8.2 and 8.3 compatibility for admin gallery selection lists.
 	* Performance: Optimized internal query parameters for smoother admin dashboard performance.
+= 1.7.41 =
+	* Tweak: WordPress 7.1 compatibility test.
 = 1.7.40 =
 	* Removed WPEPP recommendation notice (commented out for later use)
 = 1.7.39 =
